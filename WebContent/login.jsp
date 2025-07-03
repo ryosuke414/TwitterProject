@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Twitter</title>
-<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/static/css/style.css" rel="stylesheet">
 </head>
 <body>
     <h1>ログイン</h1>
     <form action="Login.action" method="post">
-        <label>ID: <input type="text" name="handle"></label><br>
+        <label>ハンドル名: <input type="text" name="handle"></label><br>
         <label>パスワード: <input type="password" name="password"></label><br>
         <input type="submit" value="ログイン">
         <%
