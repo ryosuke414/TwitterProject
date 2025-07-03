@@ -1,15 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration>
-<!-- 上記はEclipseの警告を消すための記述です。 -->
-
 <Context reloadable="true">
-	<Resource
-		name="jdbc/school"
-		auth="Container"
-		type="javax.sql.DataSource"
-		driverClassName="org.h2.Driver"
-		url="jdbc:h2:~/twitter"
-		username="sa"
-		password=""
-	/>
+  <Resource
+    name="jdbc/twitter"
+    auth="Container"
+    type="javax.sql.DataSource"
+    driverClassName="org.h2.Driver"
+    url="jdbc:h2:~/twitter"
+    username="sa"
+    password=""
+  />
 </Context>
