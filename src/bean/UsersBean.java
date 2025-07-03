@@ -11,6 +11,19 @@ public class UsersBean implements Serializable{
 	private String profile_image;
 	private boolean is_active;
 
+	// デフォルトコンストラクタ
+    public UsersBean() {}
+
+    // 内部処理用コンストラクタ
+    public UsersBean(String username, String handle, String email,String bio,String profile_image,Boolean is_active) {
+        this.username = username;
+        this.handle = handle;
+        this.email = email;
+        this.bio=bio;
+        this.profile_image=profile_image;
+        this.is_active = is_active;
+    }
+
 
 	public String getUsername() {
 		return username;
