@@ -4,7 +4,7 @@
 
 <Context reloadable="true">
 	<Resource
-		name="jdbc/school"
+		name="jdbc/twitter"
 		auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="org.h2.Driver"
