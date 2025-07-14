@@ -1,0 +1,123 @@
+/* リセットCSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f8fa;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ログインページのコンテナ */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+/* ログインボックス */
+.login-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-align: center;
+}
+
+/* ロゴ */
+.logo h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1da1f2;
+    margin-bottom: 20px;
+}
+
+/* ヘッダー */
+.login-box h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* 入力フォーム */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e1e8ed;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #1da1f2;
+}
+
+/* ログインボタン */
+.login-button {
+    background-color: #1da1f2;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.login-button:hover {
+    background-color: #1a91da;
+}
+
+/* 登録リンク */
+.signup-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #657786;
+}
+
+.signup-link a {
+    color: #1da1f2;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+    .login-container {
+        padding: 10px;
+    }
+
+    .login-box {
+        padding: 20px;
+    }
+
+    .logo h1 {
+        font-size: 28px;
+    }
+
+    .login-box h2 {
+        font-size: 20px;
+    }
+}
