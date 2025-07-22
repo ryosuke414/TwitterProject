@@ -1,0 +1,93 @@
+/* =========================
+   index.jsp 専用スタイル
+   modal.css
+========================= */
+
+/* 中央選択カード */
+.choice-card {
+  max-width: 320px;
+  margin: 10vh auto;
+  padding: 2rem;
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.15);
+}
+.choice-card h2 {
+  margin-bottom: 1.5rem;
+}
+
+/* ボタン */
+.btn {
+  display: inline-block;
+  width: 100%;
+  margin: .5rem 0;
+  padding: .75rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-primary  { background:#007bff; color:#fff; }
+.btn-outline  { background:#fff; border:1px solid #007bff; color:#007bff; }
+.btn-close    { background:#ccc; color:#000; margin-top:1rem; }
+
+/* 背景ぼかし */
+body.modal-open .page-background {
+  filter: blur(4px) brightness(.7);
+  pointer-events: none;
+}
+
+/* モーダル共通 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 8vh;
+  background: rgba(0,0,0,.5);
+  z-index: 1000;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal {
+  width: 90%;
+  max-width: 420px;
+  background:#fff;
+  padding:2rem;
+  border-radius:12px;
+  box-shadow:0 4px 24px rgba(0,0,0,.3);
+}
+.modal h3 {
+  margin-top:0;
+  margin-bottom:1rem;
+}
+
+/* フォーム要素 */
+.modal form input[type="text"],
+.modal form input[type="password"],
+.modal form input[type="file"],
+.modal form textarea {
+  width:100%;
+  margin-bottom:1rem;
+  padding:.5rem;
+  box-sizing:border-box;
+}
+.modal form textarea {
+  min-height:80px;
+  resize:vertical;
+}
+
+/* メッセージ表示 */
+.error-msg {
+  color:red;
+  margin-top:.5rem;
+  min-height:1.25em;
+}
+.success-msg {
+  color:green;
+  margin-top:1rem;
+  text-align:center;
+}
