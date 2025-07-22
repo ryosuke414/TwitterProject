@@ -1,40 +1,47 @@
 package action;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import bean.UsersBean;
-import dao.LoginDAO;
+import bean.User;
+import dao.SearchDAO;
+import dao.UserDAO;
 import tool.Action;
 
 public class LoginAction extends Action {
-
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 入力されたハンドル名とパスワードを取得
-        String handle = request.getParameter("handle");
-        String password = request.getParameter("password");
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        req.setCharacterEncoding("UTF-8");
 
-        // 入力チェック（未入力など）
-        if (handle == null || password == null || handle.isEmpty() || password.isEmpty()) {
-            request.setAttribute("error", "ハンドル名とパスワードを入力してください。");
-            return "login.jsp";
+        String handle = req.getParameter("handle");
+        String pass = req.getParameter("password");
+
+        try {
+            User user = new UserDAO().findByHandleAndPassword(handle, pass);
+            if (user != null) {
+                // ログイン成功
+                req.getSession().setAttribute("user", user);
+                // ログイン直後に検索履歴をプリロードしてセッションに保持
+                try {
+                    List<String> history = new SearchDAO().getHistory(user.getUserId());
+                    req.getSession().setAttribute("searchHistory", history);
+                } catch (SQLException e) {
+                    // 履歴取得失敗してもログイン自体は継続
+                    e.printStackTrace();
+                }
+
+                // ログイン成功後はタイムラインへリダイレクト
+                return "Timeline.action";
+            } else {
+                // ログイン失敗時はリクエストにエラーをセットしてindex.jspへフォワード
+                req.setAttribute("loginError", "ログイン失敗");
+                return "index1.jsp";
+            }
+        } catch (SQLException e) {
+            throw e;
         }
-
-        // DAO を使ってログインチェック
-        LoginDAO dao = new LoginDAO();
-        UsersBean user = dao.checkLogin(handle, password);
-
-        // ログイン成功
-        if (user != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("loginUser", user);
-            	return "home.jsp";
-
-        }
-        // ログイン失敗
-        request.setAttribute("error", "ログインに失敗しました。ハンドル名またはパスワードが正しくありません。");
-        return "login.jsp";
     }
 }

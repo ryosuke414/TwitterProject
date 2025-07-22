@@ -1,91 +1,63 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page session="false" %>
+<%
+    String loginError = (String) request.getAttribute("loginError");
+    String registerError = (String) request.getAttribute("registerError");
+    String registered = request.getParameter("registered");
+%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitter</title>
-    <link href="<%=request.getContextPath()%>/static/css/style.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>ログイン / アカウント作成</title>
+<link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
-    <div class="container">
-        <!-- 左ナビゲーションバー -->
-        <nav class="sidebar-left">
-            <div class="logo">
-                <h1>Twitter</h1>
-            </div>
-            <ul>
-                <li><a href="#" class="active">ホーム</a></li>
-                <li><a href="#">プロフィール</a></li>
-                <li><a href="#">メッセージ</a></li>
-                <li><a href="#">設定</a></li>
-            </ul>
-        </nav>
-        <!-- メインコンテンツ -->
 
-        <!-- メインコンテンツ（タイムライン） -->
-        <main class="timeline">
-            <!-- 投稿入力エリア -->
-            <div class="post-form">
-                <img src="https://via.placeholder.com/48" alt="User Avatar" class="avatar">
-                <textarea placeholder="いま何してる？" class="post-input"></textarea>
-                <button class="post-button">投稿</button>
-            </div>
+<div class="page-background">
+  <div class="choice-card">
+    <h2>ようこそ</h2>
+    <button id="loginBtn" class="btn btn-primary" type="button">ログイン</button>
+    <button id="registerBtn" class="btn btn-outline" type="button">アカウント作成</button>
+    <% if ("1".equals(registered)) { %>
+      <p class="success-msg">登録が完了しました！ログインしてください。</p>
+    <% } %>
+  </div>
+</div>
 
-            <!-- 投稿一覧 -->
-            <div class="posts">
-                <div class="post">
-                    <img src="./static/image/profile_images/inokuchi.jpg" alt="User Avatar" class="avatar">
-                    <div class="post-content">
-                        <div class="post-header">
-                            <span class="username">猪口慎二</span>
-                            <span class="handle">@inokuchi</span>
-                            <span class="timestamp">・1時間前</span>
-                        </div>
-                        <p>授業だるい</p>
-                        <div class="post-actions">
-                            <span>💬 10</span>
-                            <span>🔁 5</span>
-                            <span>❤️ 20</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- さらに投稿を追加 -->
-                <div class="post">
-                    <img src="https://via.placeholder.com/48" alt="User Avatar" class="avatar">
-                    <div class="post-content">
-                        <div class="post-header">
-                            <span class="username">ユーザー名2</span>
-                            <span class="handle">@handle2</span>
-                            <span class="timestamp">・2時間前</span>
-                        </div>
-                        <p>もう一つのサンプル投稿。シンプルでモダンなデザインを目指しました。</p>
-                        <div class="post-actions">
-                            <span>💬 8</span>
-                            <span>🔁 3</span>
-                            <span>❤️ 15</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+<!-- ログインモーダル -->
+<div id="loginModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="modal">
+    <h3 id="loginTitle">ログイン</h3>
+    <form action="Login.action" method="post">
+      <input type="text" name="handle" placeholder="@handle" required>
+      <input type="password" name="password" placeholder="password" required>
+      <button type="submit" class="btn btn-primary">ログイン</button>
+    </form>
+    <p class="error-msg"><%= loginError != null ? loginError : "" %></p>
+    <button type="button" class="btn btn-close" data-close="loginModal">戻る</button>
+  </div>
+</div>
 
-        <!-- 右サイドバー -->
-        <aside class="sidebar-right">
-            <div class="search">
-                <input type="text" placeholder="検索...">
-            </div>
-            <div class="trends">
-                <h3>トレンド</h3>
-                <ul>
-                    <li>#石破内閣崩壊</li>
-                    <li>#岸田内閣支持率急落</li>
-                    <li>#パズドラサ終</li>
-                </ul>
-            </div>
-        </aside>
-    </div>
+<!-- アカウント作成モーダル -->
+<div id="registerModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="registerTitle">
+  <div class="modal">
+    <h3 id="registerTitle">アカウント作成</h3>
+    <form action="Register.action" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+      <input type="text" name="username" placeholder="ユーザー名" required>
+      <input type="text" name="handle" placeholder="@handle" required>
+      <input type="password" name="password" placeholder="パスワード" required>
+      <textarea name="bio" placeholder="自己紹介（任意）"></textarea>
+      <input type="file" name="profileImage" accept="image/*">
+      <button type="submit" class="btn btn-primary">登録</button>
+    </form>
+    <p class="error-msg"><%= registerError != null ? registerError : "" %></p>
+    <button type="button" class="btn btn-close" data-close="registerModal">戻る</button>
+  </div>
+</div>
+
+<!-- 外部JSを読み込み -->
+<script src="js/modal.js"></script>
+
 </body>
 </html>
